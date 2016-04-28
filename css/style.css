@@ -1,0 +1,43 @@
+body {
+  font: 10px sans-serif;
+}
+
+.btn-group {
+    margin-top: 15px;
+    margin-bottom: 1px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+/*  display: none;*/
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+#text-box {
+    text-align: left;
+    padding-top: 20px; 
+    font-size: 14px;
+}
+
+#note {
+    font-size: 12px;
+}
+
+.chart {
+  height: 450px;
+}
+
+#source-line {
+    font-style: italic;
+}
