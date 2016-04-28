@@ -7,8 +7,8 @@ var chartThisValue = "city";
 //Setting margin, width and height
 //Pin the width and height to the .chart div
 var margin = {top: 20, right: 80, bottom: 30, left: 50},
-    width = $(".chart").width() - margin.left - margin.right,
-    height = $(".chart").height() - margin.top - margin.bottom;
+    width = $(".chart2").width() - margin.left - margin.right,
+    height = $(".chart2").height() - margin.top - margin.bottom;
 
 //parse the date as year
 var parseDate = d3.time.format("%Y").parse;
@@ -40,26 +40,14 @@ var line = d3.svg.line()
         return y(d.crimeRate); 
         });
 //define svg
-var svg = d3.select(".chart").append("svg")
+var svg = d3.select(".chart2").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-function setNav() {
-    $(".btn").on("click", function (){
-        
-        $(".btn").removeClass("active");
-        $(this).addClass("active");
-        
-        var val = $(this).attr("val");
-        chartThisValue = val;
-        updateLine();
-    });
-}
 
-
-d3.csv("data/crime_multi.csv", function(error, data) {
+d3.csv("data/crime_rape.csv", function(error, data) {
   if (error) throw error;
 
 var colorDomain = d3.keys(
