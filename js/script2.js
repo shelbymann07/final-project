@@ -360,8 +360,5 @@ function updateLine(val) {
         .attr("transform", function(d) {
             return "translate(" + x(d.value.date) + "," + y(d.value[chartThisValue]) + ")";
         })
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> ef07dda7a1cc0626d478f938facb42d8b51d116d
+
