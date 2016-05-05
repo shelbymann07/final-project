@@ -156,7 +156,7 @@ var rapeLookup = {
         "Stockton": 1548
     }
 }
-var chartThisValue = "city";
+var chartThisValue = "crimeRate";
 console.log(chartThisValue);
 //Setting margin, width and height
 //Pin the width and height to the .chart div
@@ -196,8 +196,10 @@ var line = d3.svg.line()
         return x(d.date);
     })
     .y(function(d) {
-        return y(d.crimeRate);
+        return y(d[chartThisValue]);
     });
+
+
 //define svg
 var svg = d3.select(".chart").append("svg")
     .attr("width", width + margin.left + margin.right)
