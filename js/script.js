@@ -277,19 +277,9 @@ d3.csv("data/crime_multi.csv", function(error, data) {
         return d.date;
     }));
 
-    y.domain([
-        /*d3.min(cities, function(c) { 
-        return d3.min(c.values, function(v) { 
-            return v.crimeRate; 
-            }); 
-        }),--don't need this because minimum will be 0'*/
-        0,
-        d3.max(cities, function(c) {
-            return d3.max(c.values, function(v) {
-                return v.crimeRate;
-            });
-        })
-    ]);
+  y.domain([400, d3.max(data, function(d) { 
+      return d.crimeRate; 
+    })]);
 
     svg.append("g")
         .attr("class", "x axis")
