@@ -157,7 +157,7 @@ var rapeLookup = {
     }
 }
 var chartThisValue = "city";
-console.log(chartThisValue);
+    console.log(chartThisValue);
 //Setting margin, width and height
 //Pin the width and height to the .chart div
 var margin = {
@@ -205,17 +205,30 @@ var svg = d3.select(".chart").append("svg")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-function setNav() {
-    $(".btn").on("click", function() {
 
-        $(".btn").removeClass("active");
-        $(this).addClass("active");
 
-        var val = $(this).attr("val");
+$(".btn").on("click", function() {
+
+	/* Get the class name for the chart we want from the button markup in index.html */
+	var chartName = $(this).attr("val");
+
+	/* Hide all of the charts */
+	$(".chart-container").fadeOut();
+
+	/* Show the one we want using the class name we pulled from the clicked button */
+	$(".chart-container."+chartName).fadeIn();
+
+
+	/* Remove the active class from all of the buttons. */
+	$(".btn").removeClass("active");
+
+	/* Add the active class to the one we just clicked */
+	$(this).addClass("active");
+
         chartThisValue = val;
         updateLine();
     });
-}
+
 
 
 d3.csv("data/crime_multi.csv", function(error, data) {
@@ -274,7 +287,7 @@ d3.csv("data/crime_multi.csv", function(error, data) {
         return d3.min(c.values, function(v) { 
             return v.crimeRate; 
             }); 
-        }),--don't need this becasue minimum will be 0'*/
+        }),--don't need this because minimum will be 0'*/
         0,
         d3.max(cities, function(c) {
             return d3.max(c.values, function(v) {
@@ -331,9 +344,6 @@ d3.csv("data/crime_multi.csv", function(error, data) {
         });
     
 
-    setNav();
-
-
 });
 
 
@@ -352,10 +362,11 @@ function updateLine(val) {
             return line(d.values);
         });
 
-    //Update the positions of you labels.
+    //Update the positions of your labels.
     svg.selectAll("text.city-label")
       .transition().duration(500)
       .attr("transform", function(d) {
             return "translate(" + x(d.value.date) + "," + y(d.value[chartThisValue]) + ")";
         })
 }
+
