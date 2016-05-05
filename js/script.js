@@ -291,18 +291,23 @@ d3.csv("data/crime_multi.csv", function(error, data) {
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
+        .call(xAxis)
+        .append("text")
+            .attr("x", 310)
+            .attr("y", 30)
+            .style("text-anchor", "middle")
+            .text("Year");
 
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis)
         .append("text")
-        .attr("transform", "rotate(0)")
-        .attr("y", -5)
-        .attr("x", 98)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Violent Crime Rate");
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left)
+            .attr("x", 0 - (height/2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("Violent Crime Rate");
 
     var city = svg.selectAll(".city")
         .data(cities)
