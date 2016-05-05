@@ -189,6 +189,12 @@ var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left");
 
+x.domain(d3.extent(data, function(d) {
+        return d.date;
+    }));
+
+  y.domain([400,2500]);
+
 //The line function draws points for a path based on the date and 'value' for each row in each series. 
 var line = d3.svg.line()
     .interpolate("basis")
@@ -273,13 +279,7 @@ d3.csv("data/crime_multi.csv", function(error, data) {
 
 
 
-    x.domain(d3.extent(data, function(d) {
-        return d.date;
-    }));
 
-  y.domain([400, d3.max(data, function(d) { 
-      return d.crimeRate; 
-    })]);
 
     svg.append("g")
         .attr("class", "x axis")
@@ -292,37 +292,7 @@ d3.csv("data/crime_multi.csv", function(error, data) {
         .append("text")
         .attr("transform", "rotate(0)")
         .attr("y", -5)
-        .attr("x", 98)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Violent Crime Rate");
 
-    var city = svg.selectAll(".city")
-        .data(cities)
-        .enter().append("g")
-        .attr("class", "city");
-
-    city.append("path")
-        .attr("class", "line")
-        .attr("d", function(d) {
-            return line(d.values);
-        })
-        .style("stroke", function(d) {
-            return color(d.name);
-        });
-
-    city.append("text")
-        .datum(function(d) {
-            return {
-                name: d.name,
-                value: d.values[d.values.length - 1]
-            };
-        })
-        .attr("transform", function(d) {
-            return "translate(" + x(d.value.date) + "," + y(d.value.crimeRate) + ")";
-        })
-        .attr("class", "city-label")
-        .attr("x", 3)
         .attr("dy", ".35em")
         .text(function(d) {
             return d.name;

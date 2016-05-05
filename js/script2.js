@@ -218,10 +218,8 @@ $(".btn").on("click", function() {
 	/* Show the one we want using the class name we pulled from the clicked button */
 	$(".chart-container."+chartName).fadeIn();
 
-
 	/* Remove the active class from all of the buttons. */
 	$(".btn").removeClass("active");
-
 	/* Add the active class to the one we just clicked */
 	$(this).addClass("active");
 
@@ -283,12 +281,11 @@ d3.csv("data/crime_multi.csv", function(error, data) {
     }));
 
     y.domain([
-        /*d3.min(cities, function(c) { 
+        d3.min(cities, function(c) { 
         return d3.min(c.values, function(v) { 
             return v.crimeRate; 
             }); 
-        }),--don't need this because minimum will be 0'*/
-        0,
+        }),
         d3.max(cities, function(c) {
             return d3.max(c.values, function(v) {
                 return v.crimeRate;
