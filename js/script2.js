@@ -211,14 +211,7 @@ var svg = d3.select(".chart").append("svg")
 
 $(".btn").on("click", function() {
 
-    /* Get the class name for the chart we want from the button markup in index.html */
-    //var chartName = $(this).attr("val");
-
-
     chartThisValue = $(this).attr("val")
-    
-    /* Hide all of the charts */
-    //$(".chart-container").fadeOut();
 
 	/* Remove the active class from all of the buttons. */
 	$(".btn").removeClass("active");
