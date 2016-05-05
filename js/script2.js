@@ -157,7 +157,7 @@ var rapeLookup = {
     }
 }
 var chartThisValue = "city";
-    console.log(chartThisValue);
+console.log(chartThisValue);
 //Setting margin, width and height
 //Pin the width and height to the .chart div
 var margin = {
@@ -209,25 +209,28 @@ var svg = d3.select(".chart").append("svg")
 
 $(".btn").on("click", function() {
 
-	/* Get the class name for the chart we want from the button markup in index.html */
-	var chartName = $(this).attr("val");
-
-	/* Hide all of the charts */
-	$(".chart-container").fadeOut();
-
-	/* Show the one we want using the class name we pulled from the clicked button */
-	$(".chart-container."+chartName).fadeIn();
+    /* Get the class name for the chart we want from the button markup in index.html */
+    //var chartName = $(this).attr("val");
 
 
-	/* Remove the active class from all of the buttons. */
-	$(".btn").removeClass("active");
+    chartThisValue = $(this).attr("val")
+    
+    /* Hide all of the charts */
+    //$(".chart-container").fadeOut();
 
-	/* Add the active class to the one we just clicked */
-	$(this).addClass("active");
+    /* Show the one we want using the class name we pulled from the clicked button */
+    //$(".chart-container." + chartName).fadeIn();
 
-        chartThisValue = val;
-        updateLine();
-    });
+
+    /* Remove the active class from all of the buttons. */
+    $(".btn").removeClass("active");
+
+    /* Add the active class to the one we just clicked */
+    $(this).addClass("active");
+
+    
+    updateLine();
+});
 
 
 
@@ -342,7 +345,7 @@ d3.csv("data/crime_multi.csv", function(error, data) {
         .text(function(d) {
             return d.name;
         });
-    
+
 
 });
 
@@ -364,9 +367,8 @@ function updateLine(val) {
 
     //Update the positions of your labels.
     svg.selectAll("text.city-label")
-      .transition().duration(500)
-      .attr("transform", function(d) {
+        .transition().duration(500)
+        .attr("transform", function(d) {
             return "translate(" + x(d.value.date) + "," + y(d.value[chartThisValue]) + ")";
         })
 }
-
