@@ -156,8 +156,8 @@ var rapeLookup = {
         "Stockton": 1548
     }
 }
-var chartThisValue = "city";
-    console.log(chartThisValue);
+var chartThisValue = "crimeRate";
+console.log(chartThisValue);
 //Setting margin, width and height
 //Pin the width and height to the .chart div
 var margin = {
@@ -196,8 +196,10 @@ var line = d3.svg.line()
         return x(d.date);
     })
     .y(function(d) {
-        return y(d.crimeRate);
+        return y(d[chartThisValue]);
     });
+
+
 //define svg
 var svg = d3.select(".chart").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -209,23 +211,16 @@ var svg = d3.select(".chart").append("svg")
 
 $(".btn").on("click", function() {
 
-	/* Get the class name for the chart we want from the button markup in index.html */
-	var chartName = $(this).attr("val");
-
-	/* Hide all of the charts */
-	$(".chart-container").fadeOut();
-
-	/* Show the one we want using the class name we pulled from the clicked button */
-	$(".chart-container."+chartName).fadeIn();
+    chartThisValue = $(this).attr("val")
 
 	/* Remove the active class from all of the buttons. */
 	$(".btn").removeClass("active");
 	/* Add the active class to the one we just clicked */
 	$(this).addClass("active");
 
-        chartThisValue = val;
-        updateLine();
-    });
+    
+    updateLine();
+});
 
 
 
@@ -280,8 +275,8 @@ d3.csv("data/crime_multi.csv", function(error, data) {
         return d.date;
     }));
 
-    y.domain([
-        d3.min(cities, function(c) { 
+    y.domain([400,2600]);
+      /*  d3.min(cities, function(c) { 
         return d3.min(c.values, function(v) { 
             return v.crimeRate; 
             }); 
@@ -290,8 +285,8 @@ d3.csv("data/crime_multi.csv", function(error, data) {
             return d3.max(c.values, function(v) {
                 return v.crimeRate;
             });
-        })
-    ]);
+        })*/
+   
 
     svg.append("g")
         .attr("class", "x axis")
@@ -339,7 +334,7 @@ d3.csv("data/crime_multi.csv", function(error, data) {
         .text(function(d) {
             return d.name;
         });
-    
+
 
 });
 
@@ -361,9 +356,8 @@ function updateLine(val) {
 
     //Update the positions of your labels.
     svg.selectAll("text.city-label")
-      .transition().duration(500)
-      .attr("transform", function(d) {
+        .transition().duration(500)
+        .attr("transform", function(d) {
             return "translate(" + x(d.value.date) + "," + y(d.value[chartThisValue]) + ")";
         })
 }
-
